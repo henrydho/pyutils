@@ -30,6 +30,7 @@ Pipfile*
 # Project files & folders
 logs/
 *.mp4
+*.mov
 .DS_Store
 ipsecdecoder.py
 
