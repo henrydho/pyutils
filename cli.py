@@ -1,7 +1,7 @@
 """Command Line Input module"""
 from typing import Union, Literal, NamedTuple
 
-from utilities.utils import TextFormatter, Validator
+from utils import TextFormatter, Validator
 
 
 class PromptMenu(NamedTuple):

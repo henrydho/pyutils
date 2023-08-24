@@ -39,8 +39,18 @@ class Validator:
         """Validate data"""
         try:
             match datatype:
-                case 'int':
-                    is_positive_int(data)
+                case 'number':
+                    is_number(number=data, num_type=datatype)
+                case 'integer':
+                    is_number(number=data, num_type=datatype)
+                case 'positive_integer':
+                    is_number(number=data, num_type=datatype)
+                case 'negative_integer':
+                    is_number(number=data, num_type=datatype)
+                case 'float':
+                    is_number(number=data, num_type=datatype)
+                # case 'int':
+                #     is_positive_int(data)
                 case 'ip':
                     is_ip_addr(ip_addr=data)
                 case 'ipv4':
@@ -49,6 +59,8 @@ class Validator:
                     is_ip_addr(ip_addr=data, addr_type=datatype)
                 case 'input':
                     is_valid_value(data, kwargs['valid_values'])
+                case _:
+                    raise ValueError(f"Invalid data type '{datatype}'")
             return data
         except ValueError as err:
             raise ValueError(err) from err
@@ -85,9 +97,9 @@ def is_ipv4(ip_addr: str) -> bool:
     """Validate IPv4 address
 
     :param ip_addr: a `str` value represents an IPv4 address
-    :return: a `True` bool value if it is a valid IPv4 address 
+    :return: a `True` bool value if it is a valid IPv4 address
     :rtype: `bool`
-    :raise ValueError: if it is not a valid IPv4 address 
+    :raise ValueError: if it is not a valid IPv4 address
     """
     try:
         if isinstance(ip_address(ip_addr), IPv4Address):
@@ -100,9 +112,9 @@ def is_ipv6(ip_addr: str) -> bool:
     """Validate IPv6 address
 
     :param ip_addr: a `str` value represents an IPv6 address
-    :return: a `True` bool value if it is a valid IPv6 address 
+    :return: a `True` bool value if it is a valid IPv6 address
     :rtype: `bool`
-    :raise ValueError: if it is not a valid IPv6 address 
+    :raise ValueError: if it is not a valid IPv6 address
     """
     try:
         if isinstance(ip_address(ip_addr), IPv6Address):
@@ -111,10 +123,45 @@ def is_ipv6(ip_addr: str) -> bool:
         pass  # To raise custom ValueError
     raise ValueError(f"'{ip_addr}' does not appear to be a valid IPv6 address.")
 
+def is_number(number: str, num_type: str='number'):
+    """Validate a valid number
+    :param number: a `str` represents an number value
+    :param num_type: a `str` represents a number type. Default is `number`
+        Possible values:
+            number
+            integer
+            positive_integer
+            negative_integer
+            float
+    :return: a `True` bool value if it is a valid number matched with the provied `num_type`
+    :rtype: `bool`
+    :raise ValueError: if it is not a valid number
+    """
+    try:
+        match num_type:
+            case 'integer':
+                if isinstance(int(number), int):
+                    return True
+            case 'positive_integer':
+                if int(number) and int(number) > 0:
+                    return True
+            case 'negative_integer':
+                if int(number) and int(number) < 0:
+                    return True
+            case 'float':
+                if isinstance(float(number), float):
+                    return True
+            case _:
+                if isinstance(float(number), float):
+                    return True
+    except ValueError:
+        pass
+    raise ValueError(f"'{number}' is not a valid {num_type}.")
+
 def is_positive_int(x: str) -> bool:
     """Validate positive integer
 
-    :param integer: a `str` represents an `integer` value
+    :param x: a `str` represents an `integer` value
     :return: a `True` bool value if it is a positive integer
     :rtype: `bool`
     :raise ValueError: if it is not a valid positive integer

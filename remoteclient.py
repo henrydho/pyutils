@@ -7,7 +7,7 @@ from typing import Union
 from jumpssh import SSHSession, exception
 import paramiko
 
-from utilities.logger import logger
+from logger import logger
 
 
 class RemoteClient:
