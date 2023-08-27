@@ -20,6 +20,51 @@ Install the following python packages:
 python3 -m pip install paramiko==2.8.0 jumpssh loguru
 ```
 
+<details>
+	<summary>Example</summary>
+
+	from cli import PromptMenu, PromptInput, InteractiveCli
+
+	# Define a list of namedtuple PromptMenu
+	calculator_menu = [
+		PromptMenu('+', f'Addition'),
+		PromptMenu('-', f'Subtraction'),
+		PromptMenu('*', f'Multiplication'),
+		PromptMenu('/', f'Devision')
+		]
+
+	# Instantiate InteractiveCli object
+	calculator_cli = InteractiveCli(
+		title='Caculator Menu Selection',
+		menu=calculator_menu,
+		prompt_message='Command'
+		)
+
+	# Display PromptMenu and return a command value
+	calculator_cli.prompt_menu()
+
+	# Define the namedtuple PromptInput
+	num1_prompt = PromptInput(
+		message='Enter number 1',
+		datatype='number',
+		description='Number 1',
+		input_type='info'
+		)
+	num2_prompt = PromptInput(
+		message='Enter number 2',
+		datatype='number',
+		description='Number 2',
+		input_type='info'
+		)
+
+	# Prompt users to input data and return a list of data
+	calculator_cli.prompt_inputs(
+		prompts=[num1_prompt, num2_prompt],
+		exit_cmd='r'
+		)
+
+</details>
+
 ### Example
 ```python
 # Import RemoteClient module
