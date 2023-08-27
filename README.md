@@ -7,19 +7,6 @@ Various python modules that can be used by other python projects.
 ### Example
 ![InteractiveCli Demo](images/interactivecli_demo.gif)
 
-## RemoteClient
-### [remoteclient.py](https://github.com/henrydho/pyutils/blob/main/remoteclient.py)
-
-### Prerequisites
-Install the following python packages:
-* paramiko==2.8.0
-* jumpssh
-* loguru
-
-```bash
-python3 -m pip install paramiko==2.8.0 jumpssh loguru
-```
-
 <details>
 	<summary>Example</summary>
 
@@ -64,6 +51,19 @@ python3 -m pip install paramiko==2.8.0 jumpssh loguru
 		)
 
 </details>
+
+## RemoteClient
+### [remoteclient.py](https://github.com/henrydho/pyutils/blob/main/remoteclient.py)
+
+### Prerequisites
+Install the following python packages:
+* paramiko==2.8.0
+* jumpssh
+* loguru
+
+```bash
+python3 -m pip install paramiko==2.8.0 jumpssh loguru
+```
 
 ### Example
 ```python
